@@ -20,12 +20,16 @@ export class AwsCdkCloudformationStack extends cdk.Stack {
 			},
 		});
 
-		new Bucket(this, 'MyFirstL2Bucket', {
+		const MyFirstL2Bucket = new Bucket(this, 'MyFirstL2Bucket', {
 			lifecycleRules: [
 				{
 					expiration: cdk.Duration.days(2),
 				},
 			],
+		});
+
+		new cdk.CfnOutput(this, 'MyFirstL2Bucket', {
+			value: MyFirstL2Bucket.bucketName,
 		});
 	}
 }
